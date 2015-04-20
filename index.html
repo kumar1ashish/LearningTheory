@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Learning Theory</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Learning Theory">
+  <meta name="author" content="Ashish Kumar">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Learning Theory</h1>
+    <h2></h2>
+    <p>Ashish Kumar<br/>Data Scientist - Attune Consulting | Author</p>
+  </hgroup>
+    <a href="https://github.com/kumar1ashish/LearningTheory/zipball/gh-pages" class="example">
+     Download
+    </a>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Definition of Learning</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.</p>
+
+<p>Choice of P very important!! - Expert system or human comprehension? - Datamining!!</p>
+
+<blockquote>
+<p>Broad enough to include most tasks that we would call &quot;learning tasks&quot; but also programs that improve from experience in quite straightforward ways (rote learning or caching)!</p>
+</blockquote>
+
+<p>A database system that allows users to update data entries - it improves its performance at answering database queries, based on the experience gained from databases updates (same issue as what is intelligence)</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Concept Learning</h2>
+  </hgroup>
+  <article data-timings="">
+    <blockquote>
+<p>Much of learning involves acquiring general concepts from specific training examples.</p>
+
+<p>Each concept can be viewed as describing some subset of the objects or events defined over a larger set.</p>
+
+<p>Alternatively each concept can be thought of as a boolean-valued function defined over this larger set.</p>
+
+<p>Concept Learning - inferring a boolean-valued function from training examples of its input and output</p>
+</blockquote>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Designing a Learning System</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>T: Checkers (Draughts)</p>
+
+<p>P: percent of games won in world tournament</p>
+
+<p>What experience?</p>
+
+<p>What exactly should be learned?</p>
+
+<p>How shall it be represented?</p>
+
+<p>What specific algorithm to learn it?</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Direct versus Indirect Learning</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Individual checkers board states and correct move for each</li>
+<li>Move sequences and final outcomes of various games played.</li>
+</ol>
+
+<blockquote>
+<p>Credit Assignment Problem - the degree to which each move in the sequence deserves credit or blame for the final outcome - game can be lost even when early moves are optimal, if these are followed later by poor moves or vice versa</p>
+</blockquote>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Teacher or not?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Degree to which learner controls the sequence of training examples</p>
+
+<p>Teacher selects informative board states &amp; provides the correct moves.</p>
+
+<p>For each proposed board state the learner finds particularly confusing it asks the teacher for correct move</p>
+
+<p>Learner may have complete control as it does when it learns by playing itself with no teacher - learner may choose between experimenting with novel board states or honing its skill by playing minor variations of promising lines of play</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Choose Training Experience</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>How well training experience represents the distribution of examples over which the final system performance P must be measured</p>
+
+<p>P is percent of games in the world tournament, obvious danger when E consists of only games played against itself (probably can&#39;t get world champion to teach computer!)
+most current theories of machine learning assume that the distribution of training examples is identical to the distribution of test examples</p>
+
+<p>It is IMPORTANT to keep in mind that this assumption must often be violated in practise.</p>
+
+<p>E: play games against itself (advantage of getting a lot of data this way)</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Choose a Target Function</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>ChooseMove: B -&gt; M where B is any legal board state and M is a legal move (hopefully the &quot;best&quot; legal move)</p>
+
+<p>alternatively, function V: B -&gt;R which maps from B to some real value where higher scores are assigned to better board states
+now use the legal moves to generate every subsequent board state and use V to choose the best one and therefore the best legal move</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Choose Rep. for Target Func.</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Use a large table with an entry specifying a value for each distinct board state</p>
+
+<p>Collection of rules that match against features of the board state </p>
+
+<p>Quadratic polynomial function of predefined board features</p>
+
+<p>Artificial neural network</p>
+
+<p>NOTICE - choice of representation is closely tied to an algorithm choice!!</p>
+
+<h2>Expressibility Tradeoff</h2>
+
+<p>Very expressive representations allow close approximations to the ideal target function V,
+but the more expressive the representation the more training data the program will require in order to choose among the alternative hypothesis</p>
+
+<p>Also depending on the purpose, a more expressive representation might make it more or less easy for people to understand!!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Design</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>T: Checkers</p>
+
+<p>P: percent of games won in world tournament</p>
+
+<p>E: games played against self</p>
+
+<p>V: Board -&gt; R</p>
+
+<p>Target Function Representation:</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Choose Function Approx. Algo.</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>First need Set of training examples</p>
+
+<p><b,Vtrain(b)>
+&lt; (z1=3,z2=0,z3=1,z4=0,z5=0),+100&gt;   because z2=0
+Vtrain(b)&lt;- V1(Successor(b))</p>
+
+<p>good if  V1 tends to be more accurate for board positions closer to game&#39;s end</p>
+
+<h2>Choose Learning Algorithm</h2>
+
+<p>Learning Algorithm for choosing weights   W1 to best fit the set of training examples  {<b,Vtrain(b)>}={<b,V1(Successor(b)>)</p>
+
+<p>Best fit could be defined as minimizes the squared error E</p>
+
+<p>We seek the weights that minimize E for the observed training examples.</p>
+
+<p>We need an algorithm that incrementally refines the weights as new training examples become available &amp; is robust to errors in estimated training values.</p>
+
+<p>One such algorithm is LMS (basis of Neural Network algorithms)</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Least Mean Squares</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>LMS adjusts the weights a small amount in the direction that reduces the error on this training example</p>
+
+<p>Stochastic gradient-descent search through the space of possible hypothesis to minimize the squared error</p>
+
+<pre><code>                     ..to be continued
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Definition of Learning'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Concept Learning'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Designing a Learning System'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Direct versus Indirect Learning'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Teacher or not?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Choose Training Experience'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Choose a Target Function'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Choose Rep. for Target Func.'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Design'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Choose Function Approx. Algo.'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Least Mean Squares'>
+         11
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
